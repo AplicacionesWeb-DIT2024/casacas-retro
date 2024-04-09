@@ -9,7 +9,6 @@ Te invito a explorar la tienda online y viaja apasionadamente a través de la hi
 ## Descripción del Proyecto
 
 Proyecto para Aplicaciones Web. Casacas Retro es una tienda online para comprar remeras de futbol retro.
-
 El siguiente proyecto tendra dos partes a desarrollarse: Backend y Frontend.
 
 ### Backend
@@ -46,3 +45,4 @@ Será desarrollado en React, en el que los Clientes podran realizar lo siguiente
 #### Gestión de Compras
 #### Gestión de Pagos
 #### Gestión de Envíos
+
