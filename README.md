@@ -44,7 +44,5 @@ Será desarrollado en Laravel, en el que los Administradores podran realizar lo 
 Será desarrollado en React, en el que los Clientes podran realizar lo siguiente:
 
 #### Gestión de Compras
-
 #### Gestión de Pagos
-
 #### Gestión de Envíos
