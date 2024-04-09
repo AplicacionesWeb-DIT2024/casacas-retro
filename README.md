@@ -44,5 +44,7 @@ Será desarrollado en React, en el que los Clientes podran realizar lo siguiente
 
 #### Gestión de Compras
 #### Gestión de Pagos
+El cliente podra elegir pagar en efectivo, debito o credito.
+
 #### Gestión de Envíos
 
