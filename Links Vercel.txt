@@ -1,0 +1,3 @@
+link: https://casacas-retro.vercel.app/
+
+link deploy: https://casacas-retro-o80tcrum1-fernando-fels-projects.vercel.app/
