@@ -3,12 +3,16 @@
         <ul class="nav">
             <li class="nav-title">{{ trans('brackets/admin-ui::admin.sidebar.content') }}</li>
             
-
             <li class="nav-item nav-dropdown">
-                <a class="nav-link" href="{{ url('admin/camisetas') }}">
+                <a class="nav-link nav-dropdown-toggle" href="#">
                     <i class="nav-icon icon-globe"></i> {{ trans('admin.camiseta.title') }}
                 </a>
                 <ul class="nav-dropdown-items">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('admin/camisetas') }}">
+                            <i class="nav-icon icon-soccer"></i> Todas
+                        </a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url('admin/camisetas/clubes-nacionales') }}">
                             <i class="nav-icon icon-soccer"></i> Clubes Nacionales

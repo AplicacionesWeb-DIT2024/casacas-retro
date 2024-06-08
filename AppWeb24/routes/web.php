@@ -44,7 +44,7 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
     });
 });
 
-/* Auto-generated admin routes */
+/* Auto-generated admin routes CAMISETAS*/
 Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
     Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function() {
         Route::prefix('camisetas')->name('camisetas/')->group(static function() {
@@ -56,7 +56,7 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
             Route::post('/{camisetum}',                                 'CamisetasController@update')->name('update');
             Route::delete('/{camisetum}',                               'CamisetasController@destroy')->name('destroy');
 
-            // Rutas para subcategorías
+            // Rutas para las subcategorías de CAMISETAS
             Route::get('/clubes-nacionales', 'CamisetasController@indexClubesNacionales')->name('clubes-nacionales');
             Route::get('/clubes-internacionales', 'CamisetasController@indexClubesInternacionales')->name('clubes-internacionales');
             Route::get('/selecciones', 'CamisetasController@indexSelecciones')->name('selecciones');
@@ -65,7 +65,7 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
 });
 
 
-/* Auto-generated admin routes */
+/* Auto-generated admin routes TALLES*/
 Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
     Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function() {
         Route::prefix('talles')->name('talles/')->group(static function() {

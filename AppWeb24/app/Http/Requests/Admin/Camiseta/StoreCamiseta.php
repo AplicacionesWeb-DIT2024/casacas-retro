@@ -31,8 +31,7 @@ class StoreCamiseta extends FormRequest
             'Precio' => ['required', 'numeric'],
             'Talle' => ['required', 'string', 'in:S,M,L,XL,XXL,XXXL'], //verifica que coincida con estos valores
             'Cantidad' => ['required', 'integer'],
-            'Categoría' => ['required', 'string', 'in: Clubes Nacionales, Clubes Internacionales, Selecciones'],
-            
+            'Categoría' => ['required', 'string', 'in:Club Nacional,Club Internacional,Selección'],
         ];
     }
 

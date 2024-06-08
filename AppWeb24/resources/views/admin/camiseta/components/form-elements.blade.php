@@ -49,7 +49,12 @@
 <div class="form-group row align-items-center" :class="{'has-danger': errors.has('Categoría'), 'has-success': fields.Categoría && fields.Categoría.valid }">
     <label for="Categoría" class="col-form-label text-md-right" :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.camiseta.columns.Categoría') }}</label>
         <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
-        <input type="text" v-model="form.Categoría" v-validate="'required|integer'" @input="validate($event)" class="form-control" :class="{'form-control-danger': errors.has('Categoría'), 'form-control-success': fields.Categoría && fields.Categoría.valid}" id="Categoría" name="Categoría" placeholder="{{ trans('admin.camiseta.columns.Categoría') }}">
+        <select v-model="form.Categoría" v-validate="'required'" @input="validate($event)" class="form-control" :class="{'form-control-danger': errors.has('Categoría'), 'form-control-success': fields.Categoría && fields.Categoría.valid}" id="Categoría" name="Categoría" placeholder="{{ trans('admin.camiseta.columns.Categoría') }}">
+            <option value="" disabled>{{ trans('admin.camiseta.columns.Categoría') }}</option>
+            <option value="Club Nacional">Club Nacional</option>
+            <option value="Club Internacional">Club Internacional</option>
+            <option value="Selección">Selección</option>
+        </select>
         <div v-if="errors.has('Categoría')" class="form-control-feedback form-text" v-cloak>@{{ errors.first('Categoría') }}</div>
     </div>
 </div>

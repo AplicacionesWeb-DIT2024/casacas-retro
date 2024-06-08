@@ -19,10 +19,34 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
-//use Illuminate\Http\Request;
+use Illuminate\Http\Request;
 
 class CamisetasController extends Controller
 {
+
+    public function apiIndex()
+    {
+        $camisetas = Camiseta::all();
+        return response()->json($camisetas);
+    }
+
+    public function apiIndexClubesNacionales()
+    {
+        $camisetas = Camiseta::where('Categoría', 'Club Nacional')->get();
+        return response()->json($camisetas);
+    }
+
+    public function apiIndexClubesInternacionales()
+    {
+        $camisetas = Camiseta::where('Categoría', 'Club Internacional')->get();
+        return response()->json($camisetas);
+    }
+
+    public function apiIndexSelecciones()
+    {
+        $camisetas = Camiseta::where('Categoría', 'Selección')->get();
+        return response()->json($camisetas);
+    }
 
     /**
      * Display a listing of the resource.
@@ -30,22 +54,23 @@ class CamisetasController extends Controller
      * @param IndexCamiseta $request
      * @return array|Factory|View
      */
-    public function index(IndexCamiseta $request){
+    public function index(IndexCamiseta $request)
+    {
         return $this->filterByCategory($request, null);
     }
     public function indexClubesNacionales(IndexCamiseta $request)
     {
-        return $this->filterByCategory($request, 'Clubes Nacionales');
+        return $this->filterByCategory($request, 'Club Nacional');
     }
 
     public function indexClubesInternacionales(IndexCamiseta $request)
     {
-        return $this->filterByCategory($request, 'Clubes Internacionales');
+        return $this->filterByCategory($request, 'Club Internacional');
     }
 
     public function indexSelecciones(IndexCamiseta $request)
     {
-        return $this->filterByCategory($request, 'Selecciones');
+        return $this->filterByCategory($request, 'Selección');
     }
 
     private function filterByCategory(IndexCamiseta $request, ?string $category)
@@ -70,16 +95,14 @@ class CamisetasController extends Controller
             ['id', 'Nombre', 'Descripción', 'Talle', 'Categoría']
         );
 
-        if ($request->ajax()) {
+        if ($request->ajax() || $request->wantsJson() || $request->query('json', false)) {
             if ($request->has('bulk')) {
-                return [
-                    'bulkItems' => $data->pluck('id')
-                ];
+                return response()->json(['bulkItems' => $data->pluck('id')]);
             }
-            return ['data' => $data];
+            return response()->json(['data' => $data]);
         }
 
-        return view('admin.camiseta.index', ['data' => $data]);
+        return view('admin.camiseta.index', ['data' => $data, 'category' => $category]);
     }
 
     /**
