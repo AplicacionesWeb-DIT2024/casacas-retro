@@ -22,6 +22,10 @@ use Illuminate\View\View;
 
 class TallesController extends Controller
 {
+    public function apiIndex(){
+        $talles = Talle::all();
+        return response()->json($talles);  
+    }
 
     /**
      * Display a listing of the resource.

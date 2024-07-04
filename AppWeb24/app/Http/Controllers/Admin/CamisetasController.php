@@ -19,10 +19,38 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
-//use Illuminate\Http\Request;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
 
 class CamisetasController extends Controller
 {
+
+    public function apiIndex()
+    {
+        $camisetas = Camiseta::all();
+        return response()->json($camisetas);
+    }
+
+    public function apiIndexClubesNacionales()
+    {
+        $camisetas = Camiseta::where('Categoría', 'Club Nacional')->get();
+        return response()->json($camisetas);
+    }
+
+    public function apiIndexClubesInternacionales()
+    {
+        $camisetas = Camiseta::where('Categoría', 'Club Internacional')->get();
+        return response()->json($camisetas);
+    }
+
+    public function apiIndexSelecciones()
+    {
+        $camisetas = Camiseta::where('Categoría', 'Selección')->get();
+        return response()->json($camisetas);
+    }
 
     /**
      * Display a listing of the resource.
@@ -30,28 +58,29 @@ class CamisetasController extends Controller
      * @param IndexCamiseta $request
      * @return array|Factory|View
      */
-    public function index(IndexCamiseta $request){
+    public function index(IndexCamiseta $request)
+    {
         return $this->filterByCategory($request, null);
     }
     public function indexClubesNacionales(IndexCamiseta $request)
     {
-        return $this->filterByCategory($request, 'Clubes Nacionales');
+        return $this->filterByCategory($request, 'Club Nacional');
     }
 
     public function indexClubesInternacionales(IndexCamiseta $request)
     {
-        return $this->filterByCategory($request, 'Clubes Internacionales');
+        return $this->filterByCategory($request, 'Club Internacional');
     }
 
     public function indexSelecciones(IndexCamiseta $request)
     {
-        return $this->filterByCategory($request, 'Selecciones');
+        return $this->filterByCategory($request, 'Selección');
     }
 
     private function filterByCategory(IndexCamiseta $request, ?string $category)
     {
 
-        //$query = Camiseta::query();
+        $query = Camiseta::query();
 
         // Filtra por categoría si está proporcionada
         // create and AdminListing instance for a specific model and
@@ -65,21 +94,19 @@ class CamisetasController extends Controller
             // pass the request with params
             $request,
             // set columns to query
-            ['id', 'Nombre', 'Descripción', 'Precio', 'Talle', 'Cantidad', 'Categoría'],
+            ['id', 'Nombre', 'Descripción', 'Precio', 'Talle', 'Cantidad', 'Categoría', 'Imagen'],
             // set columns to searchIn
             ['id', 'Nombre', 'Descripción', 'Talle', 'Categoría']
         );
 
-        if ($request->ajax()) {
+        if ($request->ajax() || $request->wantsJson() || $request->query('json', false)) {
             if ($request->has('bulk')) {
-                return [
-                    'bulkItems' => $data->pluck('id')
-                ];
+                return response()->json(['bulkItems' => $data->pluck('id')]);
             }
-            return ['data' => $data];
+            return response()->json(['data' => $data]);
         }
 
-        return view('admin.camiseta.index', ['data' => $data]);
+        return view('admin.camiseta.index', ['data' => $data, 'category' => $category]);
     }
 
     /**
@@ -106,11 +133,88 @@ class CamisetasController extends Controller
         // Sanitize input
         $sanitized = $request->getSanitized();
 
-        // Store the Camiseta
-        $camisetum = Camiseta::create($sanitized);
+        // Procesar la imagen proporcionada
+        if ($request->hasFile('Imagen')) {
+            try {
+                $image = $request->file('Imagen');
+                $extension = $image->getClientOriginalExtension();
+                if (!in_array($extension, ['jpg', 'jpeg', 'png'])) {
+                    throw new \Exception('El archivo no es una imagen válida');
+                }
+                $filename = 'casacas-retro/' . Str::random(10) . '.' . $extension;
+                $image->storeAs('public', $filename);
+                $sanitized['Imagen'] = asset('storage/' . $filename);
+
+                // verifica que la imagen se haya guardado con éxito antes de actualizar el array $sanitized.
+                if (!file_exists(storage_path('app/public/' . $filename))) {
+                    throw new Exception('Error al guardar la imagen');
+                }
+            } catch (Exception $e) {
+                // Manejar errores si falla la subida de la imagen
+                return back()->withErrors(['error' => 'Error al cargar la imagen: ' . $e->getMessage()]);
+            }
+        }else {
+            $sanitized['Imagen'] = 'app/public/casacas-retro/messi2010.jpeg'; // Establecer imagen predeterminada
+        }
+
+        // Guardar la camiseta en la base de datos
+        Camiseta::create($sanitized);
+
+        // Redireccionar a la vista de la camiseta
+        if ($request->ajax()) {
+            return [
+                'redirect' => url('admin/camisetas'), 
+                'message' => trans('brackets/admin-ui::admin.operation.succeeded')
+            ];
+        }
+
+        return redirect('admin/camisetas');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param UpdateCamiseta $request
+     * @param Camiseta $camisetum
+     * @return array|RedirectResponse|Redirector
+     */
+    public function update(UpdateCamiseta $request, Camiseta $camisetum)
+    {
+        // Sanitize input
+        $sanitized = $request->getSanitized();
+
+        // Procesar la imagen si se proporciona
+        if ($request->hasFile('Imagen')) {
+            try {
+                $image = $request->file('Imagen');
+                $imageName = 'camiseta_' . preg_replace('/[^a-zA-Z0-9_]/', '_', $sanitized['Nombre']) . '.' . $image->getClientOriginalExtension();
+                
+                // Guardar la imagen en la carpeta public/camisetas
+                $image->move(public_path('camisetas'), $imageName);
+
+                // Guardar la ruta de la imagen en el campo 'Imagen'
+                $sanitized['Imagen'] = 'camisetas/' . $imageName;
+
+                // Eliminar la imagen anterior si existe
+                if ($camisetum->Imagen) {
+                    $oldImagePath = public_path($camisetum->Imagen);
+                    if (file_exists($oldImagePath)) {
+                        unlink($oldImagePath);
+                    }
+                }
+            } catch (Exception $e) {
+                return back()->withErrors(['error' => 'Error uploading image: ' . $e->getMessage()]);
+            }
+        }
+
+        // Actualizar la camiseta en la base de datos
+        $camisetum->update($sanitized);
 
         if ($request->ajax()) {
-            return ['redirect' => url('admin/camisetas'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];
+            return [
+                'redirect' => url('admin/camisetas'),
+                'message' => trans('brackets/admin-ui::admin.operation.succeeded'),
+            ];
         }
 
         return redirect('admin/camisetas');
@@ -145,31 +249,6 @@ class CamisetasController extends Controller
         return view('admin.camiseta.edit', [
             'camisetum' => $camisetum,
         ]);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param UpdateCamiseta $request
-     * @param Camiseta $camisetum
-     * @return array|RedirectResponse|Redirector
-     */
-    public function update(UpdateCamiseta $request, Camiseta $camisetum)
-    {
-        // Sanitize input
-        $sanitized = $request->getSanitized();
-
-        // Update changed values Camiseta
-        $camisetum->update($sanitized);
-
-        if ($request->ajax()) {
-            return [
-                'redirect' => url('admin/camisetas'),
-                'message' => trans('brackets/admin-ui::admin.operation.succeeded'),
-            ];
-        }
-
-        return redirect('admin/camisetas');
     }
 
     /**

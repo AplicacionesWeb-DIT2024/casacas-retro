@@ -31,8 +31,8 @@ class UpdateCamiseta extends FormRequest
             'Precio' => ['sometimes', 'numeric'],
             'Talle' => ['sometimes', 'string', 'in:S,M,L,XL,XXL,XXXL'],
             'Cantidad' => ['sometimes', 'integer'],
-            'Categoría' => ['sometimes', 'string', 'in: Clubes Nacionales, Clubes Internacionales, Selecciones'],
-            
+            'Categoría' => ['sometimes', 'string', 'in:Club Nacional,Club Internacional,Selección'],
+            'Imagen' => ['sometimes', 'file', 'image', 'mimes:jpeg,png,jpg'],            
         ];
     }
 

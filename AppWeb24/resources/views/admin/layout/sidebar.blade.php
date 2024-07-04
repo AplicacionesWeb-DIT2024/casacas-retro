@@ -3,12 +3,16 @@
         <ul class="nav">
             <li class="nav-title">{{ trans('brackets/admin-ui::admin.sidebar.content') }}</li>
             
-
             <li class="nav-item nav-dropdown">
-                <a class="nav-link" href="{{ url('admin/camisetas') }}">
+                <a class="nav-link nav-dropdown-toggle" href="#">
                     <i class="nav-icon icon-globe"></i> {{ trans('admin.camiseta.title') }}
                 </a>
                 <ul class="nav-dropdown-items">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('admin/camisetas') }}">
+                            <i class="nav-icon icon-soccer"></i> Todas
+                        </a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url('admin/camisetas/clubes-nacionales') }}">
                             <i class="nav-icon icon-soccer"></i> Clubes Nacionales
@@ -28,7 +32,8 @@
             </li>
             
             <li class="nav-item"><a class="nav-link" href="{{ url('admin/talles') }}"><i class="nav-icon icon-star"></i> Guia de Talle </a></li>
-           {{-- Do not delete me :) I'm used for auto-generation menu items --}}
+            <li class="nav-item"><a class="nav-link" href="{{ url('admin/users') }}"><i class="nav-icon icon-compass"></i> Usuarios </a></li>
+            {{-- Do not delete me :) I'm used for auto-generation menu items --}}
 
             <li class="nav-title">{{ trans('brackets/admin-ui::admin.sidebar.settings') }}</li>
             <li class="nav-item"><a class="nav-link" href="{{ url('admin/admin-users') }}"><i class="nav-icon icon-user"></i> {{ __('Manage access') }}</a></li>

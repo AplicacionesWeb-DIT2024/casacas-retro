@@ -3098,9 +3098,11 @@ if (token) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
 /* harmony import */ var _app_components_Form_AppForm__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../app-components/Form/AppForm */ "./resources/js/admin/app-components/Form/AppForm.js");
 
-Vue.component('camiseta-form', {
+
+vue__WEBPACK_IMPORTED_MODULE_1__["default"].component('camiseta-form', {
   mixins: [_app_components_Form_AppForm__WEBPACK_IMPORTED_MODULE_0__["default"]],
   data: function data() {
     return {
@@ -3109,7 +3111,9 @@ Vue.component('camiseta-form', {
         Descripción: '',
         Precio: '',
         Talle: '',
-        Cantidad: ''
+        Cantidad: '',
+        Categoría: '',
+        Imagen: null
       }
     };
   }
@@ -3161,6 +3165,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _profile_edit_password__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./profile-edit-password */ "./resources/js/admin/profile-edit-password/index.js");
 /* harmony import */ var _camiseta__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./camiseta */ "./resources/js/admin/camiseta/index.js");
 /* harmony import */ var _talle__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./talle */ "./resources/js/admin/talle/index.js");
+/* harmony import */ var _user__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./user */ "./resources/js/admin/user/index.js");
+
 
 
 
@@ -3318,6 +3324,58 @@ Vue.component('talle-listing', {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Listing__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Listing */ "./resources/js/admin/talle/Listing.js");
 /* harmony import */ var _Form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Form */ "./resources/js/admin/talle/Form.js");
+
+
+
+/***/ }),
+
+/***/ "./resources/js/admin/user/Form.js":
+/*!*****************************************!*\
+  !*** ./resources/js/admin/user/Form.js ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _app_components_Form_AppForm__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../app-components/Form/AppForm */ "./resources/js/admin/app-components/Form/AppForm.js");
+
+Vue.component('user-form', {
+  mixins: [_app_components_Form_AppForm__WEBPACK_IMPORTED_MODULE_0__["default"]],
+  data: function data() {
+    return {
+      form: {}
+    };
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/admin/user/Listing.js":
+/*!********************************************!*\
+  !*** ./resources/js/admin/user/Listing.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _app_components_Listing_AppListing__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../app-components/Listing/AppListing */ "./resources/js/admin/app-components/Listing/AppListing.js");
+
+Vue.component('user-listing', {
+  mixins: [_app_components_Listing_AppListing__WEBPACK_IMPORTED_MODULE_0__["default"]]
+});
+
+/***/ }),
+
+/***/ "./resources/js/admin/user/index.js":
+/*!******************************************!*\
+  !*** ./resources/js/admin/user/index.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Listing__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Listing */ "./resources/js/admin/user/Listing.js");
+/* harmony import */ var _Form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Form */ "./resources/js/admin/user/Form.js");
 
 
 

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('Talle');
             $table->integer('Cantidad');
             $table->string('Categoría');
+            $table->string('Imagen');
             $table->timestamps();
         });
         

@@ -13,7 +13,7 @@ class Camiseta extends Model
         'Talle',
         'Cantidad',
         'Categoría',
-    
+        'Imagen'
     ];
     
     

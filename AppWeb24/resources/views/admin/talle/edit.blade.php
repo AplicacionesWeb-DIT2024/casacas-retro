@@ -34,10 +34,10 @@
                     
                 </form>
 
-        </talle-form>
+            </talle-form>
 
         </div>
-    
-</div>
+        
+    </div>
 
 @endsection

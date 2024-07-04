@@ -39,7 +39,9 @@
                                 </div>
                             </form>
 
-                            <h1>Camisetas</h1>
+                            <br><h1>Camisetas</h1><br>
+
+                            <p style="font-size: 16px;">Las medidas de las camisetas son a modo de referencia, en el que pueden variar +/- 1 cm.</p><br>
 
                             <table class="table table-hover table-listing">
                                 <thead>
@@ -78,7 +80,7 @@
                                             </label>
                                         </td>
 
-                                    <td>@{{ item.id }}</td>
+                                        <td>@{{ item.id }}</td>
                                         <td>@{{ item.Talle }}</td>
                                         <td>@{{ item.Ancho }} cm</td>
                                         <td>@{{ item.Altura }} cm</td>
