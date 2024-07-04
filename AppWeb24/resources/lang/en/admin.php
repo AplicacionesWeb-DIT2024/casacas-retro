@@ -35,7 +35,7 @@ return [
 
         'actions' => [
             'index' => 'Camisetas',
-            'create' => 'New Camiseta',
+            'create' => 'Nueva Camiseta',
             'edit' => 'Edit :name',
         ],
 
@@ -47,6 +47,7 @@ return [
             'Talle' => 'Talle',
             'Cantidad' => 'Cantidad',
             'Categoría' => 'Categoría',
+            'Imagen' => 'Imagen',
         ],
     ],
 
@@ -55,22 +56,7 @@ return [
 
         'actions' => [
             'index' => 'Talles',
-            'create' => 'New Talle',
-            'edit' => 'Edit :name',
-        ],
-
-        'columns' => [
-            'id' => 'ID',
-            
-        ],
-    ],
-
-    'talle' => [
-        'title' => 'Talles',
-
-        'actions' => [
-            'index' => 'Talles',
-            'create' => 'New Talle',
+            'create' => 'Nuevo Talle',
             'edit' => 'Edit :name',
         ],
 
@@ -80,6 +66,22 @@ return [
             'Ancho' => 'Ancho',
             'Altura' => 'Altura',
             
+        ],
+    ],
+
+    'user' => [
+        'title' => 'Usuarios',
+
+        'actions' => [
+            'index' => 'Usuarios',
+            'create' => 'Nuevo Usuario',
+            'edit' => 'Edit :name',
+        ],
+        'columns' => [
+            'id' => 'ID',
+            'name' => 'Nombre',
+            'email' => 'Correo Electrónico',
+            // Otros campos de la tabla users
         ],
     ],
 

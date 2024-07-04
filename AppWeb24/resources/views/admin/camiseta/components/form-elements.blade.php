@@ -59,5 +59,10 @@
     </div>
 </div>
 
-
-
+<div class="form-group row align-items-center" :class="{'has-danger': errors.has('Imagen'), 'has-success': fields.Imagen && fields.Imagen.valid }">
+    <label for="Imagen" class="col-form-label text-md-right" :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.camiseta.columns.Imagen') }}</label>
+    <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
+        <input type="file" name="Imagen" accept="image/*" class="form-control-file" id="Imagen">
+        <div v-if="errors.has('Imagen')" class="form-control-feedback form-text" v-cloak>@{{ errors.first('Imagen') }}</div>
+    </div>
+</div>

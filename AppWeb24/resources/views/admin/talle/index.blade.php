@@ -80,7 +80,7 @@
                                             </label>
                                         </td>
 
-                                    <td>@{{ item.id }}</td>
+                                        <td>@{{ item.id }}</td>
                                         <td>@{{ item.Talle }}</td>
                                         <td>@{{ item.Ancho }} cm</td>
                                         <td>@{{ item.Altura }} cm</td>

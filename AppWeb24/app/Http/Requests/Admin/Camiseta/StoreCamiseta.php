@@ -32,6 +32,7 @@ class StoreCamiseta extends FormRequest
             'Talle' => ['required', 'string', 'in:S,M,L,XL,XXL,XXXL'], //verifica que coincida con estos valores
             'Cantidad' => ['required', 'integer'],
             'Categoría' => ['required', 'string', 'in:Club Nacional,Club Internacional,Selección'],
+            'Imagen' => ['nullable', 'file', 'image', 'mimes:jpeg,png,jpg'],
         ];
     }
 
@@ -47,5 +48,12 @@ class StoreCamiseta extends FormRequest
         //Add your code for manipulation with request data here
 
         return $sanitized;
+    }
+    
+    public function messages(): array
+    {
+        return [
+            //'Imagen.required' => 'El campo Imagen es requerido',
+        ];
     }
 }

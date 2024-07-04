@@ -56,6 +56,7 @@
                                         <th is='sortable' :column="'Talle'">{{ trans('admin.camiseta.columns.Talle') }}</th>
                                         <th is='sortable' :column="'Cantidad'">{{ trans('admin.camiseta.columns.Cantidad') }}</th>
                                         <th is='sortable' :column="'Categoría'">{{ trans('admin.camiseta.columns.Categoría') }}</th>
+                                        <th is='sortable' :column="'Imagen'">{{ trans('admin.camiseta.columns.Imagen') }}</th>
 
                                         <th></th>
                                     </tr>
@@ -86,6 +87,9 @@
                                         <td>@{{ item.Talle }}</td>
                                         <td>@{{ item.Cantidad }}</td>
                                         <td>@{{ item.Categoría }}</td>
+                                        <td>
+                                            <img src="@{{ asset('storage/' . item.Imagen) }}" alt="Imagen de la camiseta" width="30" height="30">
+                                        </td>
                                         
                                         <td>
                                             <div class="row no-gutters">
@@ -124,3 +128,4 @@
     </camiseta-listing>
 
 @endsection
+

@@ -50,3 +50,10 @@ $factory->define(App\Models\Talle::class, static function (Faker\Generator $fake
         
     ];
 });
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\User::class, static function (Faker\Generator $faker) {
+    return [
+        
+        
+    ];
+});

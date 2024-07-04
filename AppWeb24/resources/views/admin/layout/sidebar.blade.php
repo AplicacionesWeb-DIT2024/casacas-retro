@@ -32,7 +32,8 @@
             </li>
             
             <li class="nav-item"><a class="nav-link" href="{{ url('admin/talles') }}"><i class="nav-icon icon-star"></i> Guia de Talle </a></li>
-           {{-- Do not delete me :) I'm used for auto-generation menu items --}}
+            <li class="nav-item"><a class="nav-link" href="{{ url('admin/users') }}"><i class="nav-icon icon-compass"></i> Usuarios </a></li>
+            {{-- Do not delete me :) I'm used for auto-generation menu items --}}
 
             <li class="nav-title">{{ trans('brackets/admin-ui::admin.sidebar.settings') }}</li>
             <li class="nav-item"><a class="nav-link" href="{{ url('admin/admin-users') }}"><i class="nav-icon icon-user"></i> {{ __('Manage access') }}</a></li>

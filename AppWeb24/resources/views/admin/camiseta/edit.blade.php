@@ -34,10 +34,10 @@
                     
                 </form>
 
-        </camiseta-form>
+            </camiseta-form>
 
         </div>
-    
-</div>
+        
+    </div>
 
 @endsection
